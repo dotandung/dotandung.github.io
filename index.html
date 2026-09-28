@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tan-Dzung (Chris) Do</title>
+  <meta name="author" content="Tan-Dzung Do">
+  <meta name="description" content="Tan-Dzung (Chris) Do — Researcher at VinRobotics working on Embodied AI and humanoid loco-manipulation.">
+
+  <!-- No build step: index.html + style.css + main.js, with assets in
+       images/ and videos/. Open index.html directly and it works. -->
+  <link rel="icon" href="favicon.ico">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <script>
+    document.documentElement.classList.add('js');
+  </script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-E00L9PT3V9"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-E00L9PT3V9');
+  </script>
+</head>
+
+<body>
+
+  <!-- ================================ nav ================================ -->
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top">Tan-Dzung (Chris) Do<span class="dot">.</span></a>
+      <nav class="nav-links" id="nav-links">
+        <a href="#about">About</a>
+        <a href="#research">Research</a>
+        <a href="#experience">Experience</a>
+        <a href="#honors">Honors</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-links"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ================================ hero =============================== -->
+    <section class="hero wrap">
+      <div class="hero-top">
+
+        <div class="cell cell-profile reveal">
+          <div class="profile-img">
+            <img src="images/profile.jpg" alt="Tan-Dzung (Chris) Do">
+          </div>
+          <h1 class="h1">Tan-Dzung (Chris) Do</h1>
+          <p class="alias">Đỗ Tấn Dũng · 杜迅勇</p>
+        </div>
+
+        <div class="cell cell-bio reveal" id="about">
+          <p class="label"><span class="label-mark"></span>About</p>
+          <h2 class="h2 about-lead">I'm a researcher at <a href="https://vinrobotics.net" target="_blank" rel="noopener">VinRobotics</a>, working on Embodied AI with <a href="https://anindex.github.io" target="_blank" rel="noopener">Prof. An Thai Le</a>. I graduated from <a href="https://cs.pku.edu.cn/English/Home.htm" target="_blank" rel="noopener">the School of Computer Science</a>, <a href="https://www.pku.edu.cn/" target="_blank" rel="noopener">Peking University</a>, where I worked with <a href="https://hughw19.github.io" target="_blank" rel="noopener">Prof. He Wang</a>.</h2>
+          <div class="about-more" id="about-more">
+            <p>After graduation, I interned in the Bay Area, taking part in humanoid loco-manipulation projects with <a href="https://yuewang.xyz" target="_blank" rel="noopener">Prof. Yue Wang (USC)</a>. During my time at Galbot, I was also a member of a joint humanoid research lab co-led by <a href="https://ericyi.github.io/" target="_blank" rel="noopener">Prof. Li Yi (Tsinghua)</a>. Long ago, I had a wonderful time interning at a quant firm with <a href="https://scholar.google.com/citations?user=O0GvP1IAAAAJ&hl=en" target="_blank" rel="noopener">Dr. Luan Tran</a>.</p>
+          </div>
+          <div class="bio-foot">
+            <div class="bio-row">
+              <button class="btn" id="bio-toggle" aria-expanded="true" aria-controls="about-more"><span class="btn-bg"></span><span class="btn-text">Less about</span></button>
+              <nav class="socials" aria-label="Elsewhere">
+                <a href="mailto:tandzung.do@gmail.com" aria-label="Email" title="Email">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></svg>
+                </a>
+                <a href="https://github.com/dotandung" aria-label="GitHub" title="GitHub" target="_blank" rel="noopener">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+                </a>
+                <!-- TODO: paste your LinkedIn and Google Scholar URLs into the two hrefs below -->
+                <a href="#" data-placeholder aria-label="LinkedIn" title="LinkedIn">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+                </a>
+                <a href="#" data-placeholder aria-label="Google Scholar" title="Google Scholar">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
+                </a>
+              </nav>
+            </div>
+          </div>
+        </div>
+
+        <div class="cell cell-slider reveal" id="slider">
+          <div class="slides">
+            <a class="slide is-active" href="https://dotandung.github.io/crossbfm" target="_blank" rel="noopener">
+              <span class="slide-media"><video muted loop playsinline preload="metadata" src="videos/crossbfm.mp4"></video></span>
+              <span class="slide-body">
+                <span class="h5">CrossBFM: a shared latent behavior space across humanoid embodiments</span>
+                <span class="see">See project <i>→</i></span>
+              </span>
+            </a>
+            <a class="slide" href="https://compliantwbc.github.io/" target="_blank" rel="noopener">
+              <span class="slide-media"><video muted loop playsinline preload="metadata" src="videos/compliantwbc.mp4"></video></span>
+              <span class="slide-body">
+                <span class="h5">CompliantWBC: whole-body compliance for heavy humanoids</span>
+                <span class="see">See project <i>→</i></span>
+              </span>
+            </a>
+            <a class="slide" href="https://watch-less-feel-more.github.io/" target="_blank" rel="noopener">
+              <span class="slide-media"><video muted loop playsinline preload="metadata" src="videos/watchlessfeelmore.mp4"></video></span>
+              <span class="slide-body">
+                <span class="h5">Watch Less, Feel More: sim-to-real articulated manipulation</span>
+                <span class="see">See project <i>→</i></span>
+              </span>
+            </a>
+          </div>
+          <div class="slider-dots" role="tablist" aria-label="Featured projects">
+            <button class="is-active" aria-label="Project 1"></button>
+            <button aria-label="Project 2"></button>
+            <button aria-label="Project 3"></button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================= research ============================= -->
+    <section class="block" id="research">
+      <div class="wrap split">
+        <aside class="split-side">
+          <div class="sticky">
+            <p class="label"><span class="label-mark"></span>Selected research</p>
+            <p class="side-para">I'm interested in general robot loco-manipulation and foundation models for robots with underexplored modalities like force.</p>
+          </div>
+        </aside>
+
+        <div class="split-main projects">
+
+          <article class="project reveal">
+            <a class="project-media" href="https://dotandung.github.io/crossbfm" target="_blank" rel="noopener">
+              <video muted loop playsinline preload="metadata" src="videos/crossbfm.mp4"></video>
+            </a>
+            <div class="project-body">
+              <div class="tags"><span class="tag">2026</span><span class="tag">Under review</span><span class="tag">ECCV HuMoWM</span></div>
+              <a class="project-title" href="https://dotandung.github.io/crossbfm" target="_blank" rel="noopener">CrossBFM: Distilling a Shared Latent Behavior Space Across Humanoid Embodiments</a>
+              <p class="authors"><strong>Tan-Dzung Do</strong>,
+              <a href="https://tuandattt.github.io/" target="_blank" rel="noopener">Tuan Dat Phuong</a>,
+              <a href="https://www.ias.informatik.tu-darmstadt.de/Team/NicoBohlinger" target="_blank" rel="noopener">Nico Bohlinger</a>,
+              <a href="https://kookie14.github.io/kookie14/" target="_blank" rel="noopener">Cuc T. Trinh</a>,
+              <a href="https://www.ias.informatik.tu-darmstadt.de/Team/SiweiJu" target="_blank" rel="noopener">Siwei Ju</a>,
+              <a href="https://vienngo.github.io/" target="_blank" rel="noopener">Vien Anh Ngo</a>,
+              <a href="https://www.ias.informatik.tu-darmstadt.de/Member/JanPeters" target="_blank" rel="noopener">Jan Peters</a>,
+              <a href="https://sites.google.com/site/sitexinchaowang/" target="_blank" rel="noopener">Xinchao Wang</a>,
+              <a href="https://anindex.github.io/" target="_blank" rel="noopener">An Thai Le</a></p>
+              <p class="project-links"><a href="https://dotandung.github.io/crossbfm" target="_blank" rel="noopener">Website <i>↗</i></a></p>
+            </div>
+          </article>
+          <article class="project reveal">
+            <a class="project-media" href="https://dotandung.github.io/compliantwbc" target="_blank" rel="noopener">
+              <video muted loop playsinline preload="metadata" src="videos/compliantwbc.mp4"></video>
+            </a>
+            <div class="project-body">
+              <div class="tags"><span class="tag">2026</span><span class="tag">Under review</span><span class="tag">ECCV EMR &amp; WMEAI</span></div>
+              <a class="project-title" href="https://dotandung.github.io/compliantwbc" target="_blank" rel="noopener">CompliantWBC: Whole-Body Compliance for Heavy Humanoids via Force Latent Estimation and Residual Impedance Targets</a>
+              <p class="authors"><strong>Tan-Dzung Do</strong>, <a href="https://kookie14.github.io/kookie14/" target="_blank" rel="noopener">Cuc T. Trinh</a>, <a href="https://tuandattt.github.io/" target="_blank" rel="noopener">Tuan Dat Phuong</a>, Chien Le, Thanh Ly, <a href="https://vienngo.github.io/" target="_blank" rel="noopener">Vien Anh Ngo</a>, <a href="https://anindex.github.io/" target="_blank" rel="noopener">An Thai Le</a></p>
+              <p class="project-links"><a href="https://dotandung.github.io/compliantwbc" target="_blank" rel="noopener">Website <i>↗</i></a></p>
+            </div>
+          </article>
+
+          <article class="project reveal">
+            <a class="project-media" href="https://watch-less-feel-more.github.io/" target="_blank" rel="noopener">
+              <video muted loop playsinline preload="metadata" src="videos/watchlessfeelmore.mp4"></video>
+            </a>
+            <div class="project-body">
+              <div class="tags"><span class="tag">2025</span><span class="tag tag-hot">ICRA 2025</span><span class="tag">CoRL MRM-D &amp; LFDM</span></div>
+              <a class="project-title" href="https://watch-less-feel-more.github.io/" target="_blank" rel="noopener">Watch Less, Feel More: Sim-to-Real RL for Generalizable Articulated Object Manipulation via Motion Adaptation and Impedance Control</a>
+              <p class="authors"><strong>Tan-Dzung Do</strong>, <a href="https://user432.github.io/" target="_blank" rel="noopener">Gireesh Nandiraju</a>, <a href="https://42jaylonw.github.io/" target="_blank" rel="noopener">Jilong Wang</a>, <a href="https://hughw19.github.io/" target="_blank" rel="noopener">He Wang</a></p>
+              <p class="project-links"><a href="https://arxiv.org/abs/2502.14457/" target="_blank" rel="noopener">arXiv <i>↗</i></a><a href="https://watch-less-feel-more.github.io/" target="_blank" rel="noopener">Website <i>↗</i></a></p>
+            </div>
+          </article>
+
+          <article class="project reveal">
+            <a class="project-media" href="https://psi-lab.ai/SkillBlender-web/" target="_blank" rel="noopener">
+              <video muted loop playsinline preload="metadata" src="videos/skillblender.mp4"></video>
+            </a>
+            <div class="project-body">
+              <div class="tags"><span class="tag">2025</span><span class="tag">RSS WCBM</span></div>
+              <a class="project-title" href="https://psi-lab.ai/SkillBlender-web/" target="_blank" rel="noopener">SkillBlender: Towards Versatile Humanoid Whole-Body Loco-Manipulation via Skill Blending</a>
+              <p class="authors"><a href="https://yuxuank.com/" target="_blank" rel="noopener">Yuxuan Kuang</a>, <a href="https://geng-haoran.github.io/" target="_blank" rel="noopener">Haoran Geng</a>, <a href="https://stanfordasl.github.io//people/amine-elhafsi/" target="_blank" rel="noopener">Amine Elhafsi</a>, <strong>Tan-Dzung Do</strong>, <a href="https://people.eecs.berkeley.edu/~pabbeel/" target="_blank" rel="noopener">Pieter Abbeel</a>, <a href="https://people.eecs.berkeley.edu/~malik/" target="_blank" rel="noopener">Jitendra Malik</a>, <a href="https://profiles.stanford.edu/marco-pavone" target="_blank" rel="noopener">Marco Pavone</a>, <a href="https://yuewang.xyz/" target="_blank" rel="noopener">Yue Wang</a></p>
+              <p class="project-links"><a href="https://arxiv.org/abs/2506.09366" target="_blank" rel="noopener">arXiv <i>↗</i></a><a href="https://github.com/Humanoid-SkillBlender/SkillBlender" target="_blank" rel="noopener">Code <i>↗</i></a><a href="https://psi-lab.ai/SkillBlender-web/" target="_blank" rel="noopener">Website <i>↗</i></a></p>
+            </div>
+          </article>
+
+          <details class="more-projects reveal">
+            <summary><span class="btn btn-ghost"><span class="btn-bg"></span><span class="btn-text">Other projects <i class="plus">+</i></span></span></summary>
+
+            <article class="project project-light">
+              <a class="project-media" href="https://fai-rl-tech.github.io/tact-locomotion.github.io/" target="_blank" rel="noopener">
+                <video muted loop playsinline preload="metadata" src="videos/tactful.mp4"></video>
+              </a>
+              <div class="project-body">
+                <div class="tags"><span class="tag">2026</span><span class="tag">Under review</span><span class="tag">ECCV EMR</span></div>
+                <a class="project-title" href="https://fai-rl-tech.github.io/tact-locomotion.github.io/" target="_blank" rel="noopener">TACTful: Multi-Channel Terrain Affordance and Compliance Training for Payload-Robust Perceptive Humanoid Locomotion</a>
+                <p class="authors">Thanh Ly, Truong-Duy Dang, Chien Le, <strong>Tan-Dzung Do</strong>, <a href="https://tuandattt.github.io/" target="_blank" rel="noopener">Tuan Dat Phuong</a>, <a href="https://kookie14.github.io/kookie14/" target="_blank" rel="noopener">Cuc T. Trinh</a>, <a href="https://vienngo.github.io/" target="_blank" rel="noopener">Vien Anh Ngo</a>, <a href="https://anindex.github.io/" target="_blank" rel="noopener">An Thai Le</a></p>
+                <p class="project-links"><a href="https://fai-rl-tech.github.io/tact-locomotion.github.io/" target="_blank" rel="noopener">Website <i>↗</i></a></p>
+              </div>
+            </article>
+
+            <article class="project project-light">
+              <span class="project-media">
+                <video muted loop playsinline preload="metadata" src="videos/exoskeleton.mp4"></video>
+              </span>
+              <div class="project-body">
+                <div class="tags"><span class="tag">In-house product</span></div>
+                <span class="project-title">On Exoskeleton-aided Data for Humanoid Loco-manipulation</span>
+                <p class="authors">Yiming Wang, <strong>Tan-Dzung Do</strong>, <a href="https://changhaonan.github.io/" target="_blank" rel="noopener">Haonan Chang</a>, <a href="https://yuewang.xyz/" target="_blank" rel="noopener">Yue Wang</a></p>
+              </div>
+            </article>
+          </details>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ experience ============================ -->
+    <section class="block" id="experience">
+      <div class="wrap split">
+        <aside class="split-side">
+          <div class="sticky">
+            <p class="label"><span class="label-mark"></span>Experience</p>
+          </div>
+        </aside>
+
+        <div class="split-main">
+          <div class="accordion reveal">
+
+            <details class="acc" open>
+              <summary>
+                <span class="acc-num">00-1</span>
+                <span class="h3">USC PSI Lab</span>
+                <span class="acc-when">2025 — 2026</span>
+                <i class="acc-icon"></i>
+              </summary>
+              <div class="acc-body">
+                <div class="acc-logo"><img src="images/psi.png" alt="USC PSI Lab"></div>
+                <div>
+                  <p class="acc-role">Research Intern · Bay Area, US</p>
+                  <p>Humanoid whole-body loco-manipulation. Advisor: Prof. <a href="https://yuewang.xyz/" target="_blank" rel="noopener">Yue Wang</a>.</p>
+                  <a class="see" href="https://psi-lab.ai/" target="_blank" rel="noopener">Visit lab <i>→</i></a>
+                </div>
+              </div>
+            </details>
+
+            <details class="acc">
+              <summary>
+                <span class="acc-num">00-2</span>
+                <span class="h3">Galbot</span>
+                <span class="acc-when">2023 — 2025</span>
+                <i class="acc-icon"></i>
+              </summary>
+              <div class="acc-body">
+                <div class="acc-logo"><img src="images/galbot.svg" alt="Galbot"></div>
+                <div>
+                  <p class="acc-role">Research Intern · Beijing, CN</p>
+                  <p>Sim-to-real manipulation. Advisor: Prof. <a href="https://hughw19.github.io/" target="_blank" rel="noopener">He Wang</a>.</p>
+                  <a class="see" href="https://galbot.com/" target="_blank" rel="noopener">Visit Galbot <i>→</i></a>
+                </div>
+              </div>
+            </details>
+
+            <details class="acc">
+              <summary>
+                <span class="acc-num">00-3</span>
+                <span class="h3">CFCS, Peking University</span>
+                <span class="acc-when">2023 — 2025</span>
+                <i class="acc-icon"></i>
+              </summary>
+              <div class="acc-body">
+                <div class="acc-logo"><img src="images/cfcs.jpeg" alt="Center on Frontiers of Computing Studies"></div>
+                <div>
+                  <p class="acc-role">Research Intern · Beijing, CN</p>
+                  <p>Center on Frontiers of Computing Studies. Advisor: Prof. <a href="https://hughw19.github.io/" target="_blank" rel="noopener">He Wang</a>.</p>
+                  <a class="see" href="https://cfcs.pku.edu.cn/english/" target="_blank" rel="noopener">Visit CFCS <i>→</i></a>
+                </div>
+              </div>
+            </details>
+
+            <details class="acc">
+              <summary>
+                <span class="acc-num">00-4</span>
+                <span class="h3">WorldQuant</span>
+                <span class="acc-when">2022 — 2023</span>
+                <i class="acc-icon"></i>
+              </summary>
+              <div class="acc-body">
+                <div class="acc-logo"><img src="images/wq.jpeg" alt="WorldQuant"></div>
+                <div>
+                  <p class="acc-role">Intern · Hanoi, VN</p>
+                  <p>Quantitative research. Advisor: Dr. <a href="https://scholar.google.com/citations?user=O0GvP1IAAAAJ&hl=en" target="_blank" rel="noopener">Luan Tran</a>.</p>
+                  <a class="see" href="https://worldquant.com/" target="_blank" rel="noopener">Visit WorldQuant <i>→</i></a>
+                </div>
+              </div>
+            </details>
+
+          </div>
+
+          <p class="label label-sub"><span class="label-mark"></span>Education</p>
+          <div class="edu">
+            <a class="edu-card reveal" href="https://pku.edu.cn/" target="_blank" rel="noopener">
+              <div class="edu-top">
+                <img src="images/peking_university.png" alt="Peking University">
+                <span class="tag">2022 — 2025</span>
+              </div>
+              <span class="h4">Peking University</span>
+              <p class="edu-deg">M.Sc. in Computer Science</p>
+              <p class="edu-note">Advisor: Prof. He Wang</p>
+            </a>
+            <a class="edu-card reveal" href="https://bmstu.ru/" target="_blank" rel="noopener">
+              <div class="edu-top">
+                <img src="images/bmstu.png" alt="Bauman Moscow State Technical University">
+                <span class="tag">2018 — 2022</span>
+              </div>
+              <span class="h4">Bauman Moscow State Technical University</span>
+              <p class="edu-deg">B.Sc. in Computer Engineering</p>
+              <p class="edu-note">Graduated with Honours <br> (красный диплом)</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================== honors (blue band) ======================== -->
+    <section class="band" id="honors">
+      <div class="wrap band-grid">
+        <div>
+          <p class="label label-light"><span class="label-mark"></span>Awards &amp; honors</p>
+          <ul class="honors">
+            <li class="reveal"><span class="h4">IEEE ICRA Travel Grant</span><span class="yr">2025</span></li>
+            <li class="reveal"><span class="h4">Peking University Excellent Academic Award</span><span class="yr">2024</span></li>
+            <li class="reveal"><span class="h4">Beijing Government Scholarship <em>×3</em></span><span class="yr">2022–24</span></li>
+            <li class="reveal"><span class="h4">Vietnam–Russia Government Scholarship</span><span class="yr">2018</span></li>
+            <li class="reveal"><span class="h4">Vietnam Mathematical Olympiad, 3rd place</span><span class="yr">2017</span></li>
+          </ul>
+        </div>
+        <div>
+          <p class="label label-light"><span class="label-mark"></span>Service &amp; teaching</p>
+          <ul class="honors">
+            <li class="reveal"><span class="h4">Teaching Assistant — <a href="https://hughw19.github.io/RVAL/schedule/" target="_blank" rel="noopener">Robot Vision and Learning: From a Perspective of Embodied AI</a></span><span class="yr">2024</span></li>
+            <li class="reveal"><span class="h4">Reviewer — CoRL, ICRA</span><span class="yr">2026</span></li>
+            <li class="reveal"><span class="h4">Ex-President — Vietnamese Student Association at Peking University</span><span class="yr">Past</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================== footer ============================== -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-bottom">
+        <span>© <span id="year">2026</span> Tan-Dzung Do</span>
+        <a href="#top">Back to top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+
+</html>
