@@ -82,11 +82,10 @@ h1 {
   line-height: 1;              /* box hugs the letters, so icons center on the text */
   color: var(--darkred);
   font-weight: 600;
-  cursor: grab;
   will-change: transform;
 }
 .force:focus { outline: none; }
-/* hover note at the top-right of "force" — stays open briefly so the links can be reached */
+/* note at the top-right of "force": hover on a computer, tap on touch screens */
 .force-note {
   position: absolute;
   left: 100%;                  /* the script nudges it to stay on screen */
@@ -108,13 +107,35 @@ h1 {
   transition: opacity .15s, transform .15s, visibility 0s;
   transition-delay: .25s;      /* hide a moment late, so the pointer can cross to the links */
 }
-.force:hover .force-note,
-.force:focus-within .force-note {
+.force.open .force-note {     /* touch screens: tap the word (script in index.html) */
   opacity: 1;
   visibility: visible;
   transform: none;
   transition-delay: 0s;
 }
+@media (hover: hover) {         /* computers: hover, or keyboard focus */
+  .force:hover .force-note,
+  .force:focus-within .force-note {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition-delay: 0s;
+  }
+}
+/* the 🥊 cursor near "force" on computers (script in index.html) */
+.force-glove {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  font-size: 30px;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  will-change: transform;
+}
+.glove-on, .glove-on * { cursor: none !important; }
 .force-hand {
   position: absolute;
   top: 0;

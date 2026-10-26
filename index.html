@@ -49,7 +49,7 @@
         <div class="intro">
           <p>I'm a researcher at <a href="https://vinrobotics.net" target="_blank" rel="noopener">VinRobotics</a>  🇻🇳, working on Embodied AI with <a href="https://anindex.github.io" target="_blank" rel="noopener">Prof. An Thai Le</a>. I also closely collaborate with the IAS Lab at TU Darmstadt 🇩🇪 led by <a href="https://www.ias.informatik.tu-darmstadt.de/Team/JanPeters" target="_blank" rel="noopener">Prof. Jan Peters</a> and the xML Lab at National University of Singapore 🇸🇬 led by <a href="https://sites.google.com/site/sitexinchaowang/" target="_blank" rel="noopener">Prof. Xinchao Wang</a>.</p>
           <p>Prior to this, I did my Master's at Peking University 🇨🇳, where I was advised by <a href="https://hughw19.github.io" target="_blank" rel="noopener">Prof. He Wang</a>. After graduation, I interned in the Bay Area 🇺🇸 with <a href="https://yuewang.xyz" target="_blank" rel="noopener">Prof. Yue Wang (USC)</a>. I also had a wonderful time interning at <a href="https://worldquant.com" target="_blank" rel="noopener">WorldQuant</a> 🇻🇳 doing quant research with <a href="https://scholar.google.com/citations?user=O0GvP1IAAAAJ&hl=en" target="_blank" rel="noopener">Dr. Luan Tran (USC)</a>. I did my undergrad at Bauman Moscow State Technical University 🇷🇺.</p>
-          <p>I'm interested in general robot loco-manipulation and foundation models for robots with underexplored modalities like <span class="force" id="force" tabindex="0"><span class="force-word">force</span><span class="force-hand" aria-hidden="true"></span><span class="force-note" role="tooltip">Modeled by the mass-spring-damper system used <a href="https://watch-less-feel-more.github.io/" target="_blank" rel="noopener">here</a> and <a href="https://dotandung.github.io/compliantwbc" target="_blank" rel="noopener">here</a>.</span></span>.</p>
+          <p>I'm interested in general robot loco-manipulation and foundation models for robots with underexplored modalities like <span class="force" id="force" tabindex="0"><span class="force-word">force</span><span class="force-hand" aria-hidden="true"></span><span class="force-note" role="tooltip">Modeled by the mass-spring-damper system used in <a href="https://watch-less-feel-more.github.io/" target="_blank" rel="noopener">here</a> and <a href="https://dotandung.github.io/compliantwbc" target="_blank" rel="noopener">here</a>.</span></span>.</p>
           <nav class="links" aria-label="Elsewhere">
             <a href="mailto:tandzung.do@gmail.com">Email</a>
             <!-- TODO: add LinkedIn and Google Scholar once the URLs are ready:
@@ -306,7 +306,7 @@
     // "force" in the intro: every few seconds a hand pushes the word from a
     // random side, and it springs back as a mass-spring-damper
     // (x'' = F/m - k x - c x', slightly underdamped so it overshoots).
-    // Hover or tap pushes it too. Still for prefers-reduced-motion.
+    // On a computer the cursor becomes a 🥊 that punches it. Still for prefers-reduced-motion.
     (function () {
       var wrap = document.getElementById('force');
       if (!wrap || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -323,6 +323,10 @@
       var running = false, last = 0, visible = true, timer = 0;
 
       function ease(t) { return t * t * (3 - 2 * t); }
+      function newPush(d) {                            // random start: 12–70 px back, up to ±30 px sideways
+        hand.textContent = d.icon;
+        push = { dir: d, t: 0, at: { x: 0, y: 0 }, from: { back: 12 + Math.random() * 58, side: (Math.random() * 2 - 1) * 30 } };
+      }
 
       function step(dt) {
         var fx = -K * pos.x - C * vel.x, fy = -K * pos.y - C * vel.y;
@@ -340,11 +344,14 @@
         var away = t < 0.25 ? 1 - ease(t / 0.25)            // approach
                  : t < 0.41 ? 0                              // pushing: stays on the word
                  : ease(Math.min(1, (t - 0.41) / 0.3));      // retreat
-        var gap = 16 * away;
+        // start (and retreat) point: behind the contact point plus a sideways offset;
+        // the approach always takes 0.25 s, so a farther start means a faster icon
+        var ox = (-d.x * push.from.back - d.y * push.from.side) * away;
+        var oy = (-d.y * push.from.back + d.x * push.from.side) * away;
         // while pushing the hand rides with the word; it lets go where it was
         if (t < 0.41) push.at = { x: pos.x, y: pos.y };
-        var x = cx - hw / 2 - d.x * gap + push.at.x;
-        var y = cy - hh / 2 - d.y * gap + push.at.y;
+        var x = cx - hw / 2 + ox + push.at.x;
+        var y = cy - hh / 2 + oy + push.at.y;
         hand.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px)';
         hand.style.opacity = (1 - away).toFixed(2);
       }
@@ -368,37 +375,85 @@
         clearTimeout(timer);
         timer = setTimeout(function () {
           if (visible && !document.hidden && !push) {
-            var d = DIRS[Math.floor(Math.random() * DIRS.length)];
-            hand.textContent = d.icon;
-            push = { dir: d, t: 0, at: { x: 0, y: 0 } };
+            newPush(DIRS[Math.floor(Math.random() * DIRS.length)]);
             start();
           }
           schedule();
         }, 2000 + Math.random() * 2000);
       }
 
-      // the visitor's own push: away from where the pointer came in
+      // Computers: near the word the cursor turns into a 🥊 aimed at it.
+      // Hitting the word punches it (harder the faster you swing, and harder
+      // than the icon pushes); a click is a punch too. Over the note the normal
+      // cursor comes back so its links can be clicked.
+      var glove = null, mouse = null, speed = 0, lunge = -1, gloveOn = false;
+      var NEAR = 120;                                  // px from the word where the glove appears
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        glove = document.createElement('span');
+        glove.className = 'force-glove';
+        glove.textContent = '🥊';
+        glove.setAttribute('aria-hidden', 'true');
+        document.body.appendChild(glove);
+        var note = wrap.querySelector('.force-note');
+
+        document.addEventListener('mousemove', function (e) {
+          var now = performance.now();
+          if (mouse) {
+            var d = Math.hypot(e.clientX - mouse.x, e.clientY - mouse.y);
+            speed = 0.6 * speed + 0.4 * d / Math.max(1, now - mouse.t) * 1000;   // px/s, smoothed
+          }
+          mouse = { x: e.clientX, y: e.clientY, t: now, overNote: !!note && note.contains(e.target) };
+          aim();
+        });
+        document.addEventListener('mouseout', function (e) { if (!e.relatedTarget) { mouse = null; aim(); } });
+        window.addEventListener('scroll', aim, { passive: true });
+      }
+
+      function aim() {
+        if (!glove) return;
+        var r = wrap.getBoundingClientRect();          // the wrapper stays put: aim at the word's rest position
+        var dx = mouse ? r.left + r.width / 2 - mouse.x : 0, dy = mouse ? r.top + r.height / 2 - mouse.y : 0;
+        var on = !!mouse && !mouse.overNote && Math.hypot(dx, dy) < NEAR;
+        if (on !== gloveOn) {
+          gloveOn = on;
+          document.documentElement.classList.toggle('glove-on', on);
+          glove.style.display = on ? 'block' : 'none';
+        }
+        if (!on) return;
+        var a = Math.atan2(dy, dx), deg = a * 180 / Math.PI;
+        var jab = lunge >= 0 ? 12 * Math.sin(Math.PI * Math.min(1, lunge)) : 0;
+        var x = mouse.x + Math.cos(a) * jab - glove.offsetWidth / 2;
+        var y = mouse.y + Math.sin(a) * jab - glove.offsetHeight / 2;
+        // the emoji's fist faces left: mirror it when punching rightwards so it never turns upside down
+        var right = Math.cos(a) >= 0;
+        glove.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px) rotate(' +
+          (right ? deg : deg - 180).toFixed(1) + 'deg)' + (right ? ' scaleX(-1)' : '');
+      }
+
+      function jab() {                                 // the glove lunges toward the word and back
+        var t0 = performance.now();
+        lunge = 0;
+        (function tick(now) {
+          lunge = (now - t0) / 160;
+          if (lunge > 1) lunge = -1;
+          aim();
+          if (lunge >= 0) requestAnimationFrame(tick);
+        })(t0);
+      }
+
+      // the visitor's punch (mouse only — on touch screens a tap just opens the note):
+      // away from where the pointer came in
       function poke(e) {
-        if (e.type === 'pointerenter' && e.pointerType !== 'mouse') return;   // a tap is one push
+        if (e.pointerType !== 'mouse') return;
         if (e.target.closest && e.target.closest('.force-note')) return;      // clicking the note's links
         var r = word.getBoundingClientRect();
         var dx = r.left + r.width / 2 - e.clientX, dy = r.top + r.height / 2 - e.clientY;
         var n = Math.hypot(dx, dy) || 1;
-        vel.x += 90 * dx / n; vel.y += 90 * dy / n;
+        var hit = e.type === 'pointerdown' ? 380 : Math.min(560, 300 + 0.15 * speed);
+        if (gloveOn) jab();
+        vel.x += hit * dx / n; vel.y += hit * dy / n;
         start();
       }
-      // keep the hover note on screen: top-right of the word, shifted left if needed
-      var note = wrap.querySelector('.force-note');
-      function placeNote() {
-        if (!note) return;
-        var r = wrap.getBoundingClientRect(), w = note.offsetWidth, pad = 16;
-        var left = r.width + 4;
-        left = Math.min(left, document.documentElement.clientWidth - pad - r.left - w);
-        left = Math.max(left, pad - r.left);
-        note.style.left = left + 'px';
-      }
-      wrap.addEventListener('pointerenter', placeNote);
-      wrap.addEventListener('focusin', placeNote);
       wrap.addEventListener('pointerenter', poke);
       wrap.addEventListener('pointerdown', poke);
 
@@ -406,8 +461,33 @@
         new IntersectionObserver(function (es) { visible = es[0].isIntersecting; }).observe(wrap);
       }
       setTimeout(function () {                        // first push soon after load
-        hand.textContent = DIRS[0].icon; push = { dir: DIRS[0], t: 0, at: { x: 0, y: 0 } }; start(); schedule();
+        newPush(DIRS[0]); start(); schedule();
       }, 1200);
+    })();
+  </script>
+  <script>
+    // Note on "force": hover shows it on a computer (CSS); on touch screens a
+    // tap on the word opens it and a tap anywhere else closes it. Kept on
+    // screen: top-right of the word, shifted left if needed.
+    (function () {
+      var wrap = document.getElementById('force');
+      var note = wrap && wrap.querySelector('.force-note');
+      if (!note) return;
+      function place() {
+        var r = wrap.getBoundingClientRect(), w = note.offsetWidth, pad = 16;
+        var left = Math.min(r.width + 4, document.documentElement.clientWidth - pad - r.left - w);
+        note.style.left = Math.max(left, pad - r.left) + 'px';
+      }
+      function close() { wrap.classList.remove('open'); }
+      wrap.addEventListener('pointerenter', place);
+      wrap.addEventListener('focusin', place);
+      wrap.addEventListener('pointerdown', function (e) {
+        if (e.pointerType === 'mouse' || note.contains(e.target)) return;   // links in the note just work
+        if (wrap.classList.toggle('open')) place();
+      });
+      document.addEventListener('pointerdown', function (e) { if (!wrap.contains(e.target)) close(); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+      window.addEventListener('scroll', close, { passive: true });
     })();
   </script>
 </body>
