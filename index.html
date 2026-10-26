@@ -306,7 +306,7 @@
     // "force" in the intro: every few seconds a hand pushes the word from a
     // random side, and it springs back as a mass-spring-damper
     // (x'' = F/m - k x - c x', slightly underdamped so it overshoots).
-    // On a computer the cursor becomes a 🥊 that punches it. Still for prefers-reduced-motion.
+    // On a computer the cursor becomes a robot that rams it. Still for prefers-reduced-motion.
     (function () {
       var wrap = document.getElementById('force');
       if (!wrap || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -382,7 +382,7 @@
         }, 2000 + Math.random() * 2000);
       }
 
-      // Computers: near the word the cursor turns into a 🥊 aimed at it.
+      // Computers: near the word the cursor turns into a small robot.
       // Hitting the word punches it (harder the faster you swing, and harder
       // than the icon pushes); a click is a punch too. Over the note the normal
       // cursor comes back so its links can be clicked.
@@ -391,7 +391,7 @@
       if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
         glove = document.createElement('span');
         glove.className = 'force-glove';
-        glove.textContent = '🥊';
+        glove.innerHTML = '<img src="images/robot.svg" alt="">';
         glove.setAttribute('aria-hidden', 'true');
         document.body.appendChild(glove);
         var note = wrap.querySelector('.force-note');
@@ -420,17 +420,14 @@
           glove.style.display = on ? 'block' : 'none';
         }
         if (!on) return;
-        var a = Math.atan2(dy, dx), deg = a * 180 / Math.PI;
+        var a = Math.atan2(dy, dx);
         var jab = lunge >= 0 ? 12 * Math.sin(Math.PI * Math.min(1, lunge)) : 0;
         var x = mouse.x + Math.cos(a) * jab - glove.offsetWidth / 2;
         var y = mouse.y + Math.sin(a) * jab - glove.offsetHeight / 2;
-        // the emoji's fist faces left: mirror it when punching rightwards so it never turns upside down
-        var right = Math.cos(a) >= 0;
-        glove.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px) rotate(' +
-          (right ? deg : deg - 180).toFixed(1) + 'deg)' + (right ? ' scaleX(-1)' : '');
+        glove.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px)';   // always upright
       }
 
-      function jab() {                                 // the glove lunges toward the word and back
+      function jab() {                                 // the robot lunges toward the word and back
         var t0 = performance.now();
         lunge = 0;
         (function tick(now) {
