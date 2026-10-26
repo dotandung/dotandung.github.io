@@ -75,6 +75,62 @@ h1 {
 .intro p a { border-bottom: 1px solid var(--underline); }
 .intro p a:hover { border-bottom-color: var(--strong); }
 
+/* "force" in the intro — pushed by a hand, springs back (script in index.html) */
+.force { position: relative; display: inline-block; }
+.force-word {
+  display: inline-block;
+  line-height: 1;              /* box hugs the letters, so icons center on the text */
+  color: var(--darkred);
+  font-weight: 600;
+  cursor: grab;
+  will-change: transform;
+}
+.force:focus { outline: none; }
+/* hover note at the top-right of "force" — stays open briefly so the links can be reached */
+.force-note {
+  position: absolute;
+  left: 100%;                  /* the script nudges it to stay on screen */
+  bottom: 70%;
+  z-index: 2;
+  width: max-content;
+  max-width: 240px;
+  padding: 6px 10px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: .72rem;
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--meta);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(3px);
+  transition: opacity .15s, transform .15s, visibility 0s;
+  transition-delay: .25s;      /* hide a moment late, so the pointer can cross to the links */
+}
+.force:hover .force-note,
+.force:focus-within .force-note {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition-delay: 0s;
+}
+.force-hand {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;               /* icon centered in a square box, whatever the emoji's metrics */
+  align-items: center;
+  justify-content: center;
+  width: 1em;
+  height: 1em;
+  font-size: 2.0em;
+  line-height: 1;
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
 .links,
 .pub-links {
   display: flex;
@@ -150,6 +206,12 @@ sup.mark { margin-left: 1px; font-size: .7em; line-height: 0; }
   color: var(--meta);
 }
 .item-meta .venue { display: block; }
+/* workshop under the main venue: lighter */
+.item-meta .workshop {
+  margin-top: 6px;
+  color: var(--faint);
+}
+.accent { color: var(--darkred); font-weight: 600; }
 .item-content {
   display: flex;
   flex-direction: column;
@@ -246,6 +308,7 @@ footer {
   }
   .item-meta br { display: none; }
   .item-meta .venue + .venue::before { content: "|"; margin-right: 10px; }
+  .item-meta .workshop { margin-top: 0; color: var(--meta); font-weight: 400; }
   .item-content { padding-top: 0; border-top: none; }
   .item-visual {
     width: 100%;
